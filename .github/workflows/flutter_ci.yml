@@ -38,7 +38,7 @@ jobs:
       - name: Generate Freezed files
         run: flutter pub run build_runner build --delete-conflicting-outputs
       - name: Build APK (Development)
-        run: flutter build apk --flavor development --target lib/main_dev.dart
+        run: flutter build apk --release --target lib/main_dev.dart
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
