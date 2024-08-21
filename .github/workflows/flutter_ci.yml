@@ -1,0 +1,46 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  analyze-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.0"
+          channel: "stable"
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Generate Freezed files
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+      - name: Analyze project source
+        run: flutter analyze
+      - name: Run tests
+        run: flutter test
+
+  build-android:
+    needs: analyze-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.0"
+          channel: "stable"
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Generate Freezed files
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+      - name: Build APK (Development)
+        run: flutter build apk --flavor development --target lib/main_dev.dart
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: dev-apk
+          path: build/app/outputs/flutter-apk/app-development-release.apk
