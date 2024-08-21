@@ -1,0 +1,59 @@
+{
+    "@@locale": "ru",
+    "@segmentCommon": {
+        "description": "General Strings"
+    },
+    "hello": "Привет",
+    "@hello": {
+        "description": "Label for hello"
+    },
+    "login": "Вход",
+    "@login": {
+        "description": "Label for login"
+    },
+
+    "email": "E-mail",
+    "@email": {
+        "description": "Label for email"
+    },
+    "password": "Пароль",
+    "@password": {
+        "description": "Label for password"
+    },
+    "forgetPassword": "Забыл пароль?",
+    "@forgetPassword": {
+        "description": "Label for forget password"
+    },
+    "noAccount": "Нет аккаунта?",
+    "@noAccount": {
+        "description": "Label for no account"
+    },
+    "registration": "Регистрация",
+    "@registration": {
+        "description": "Label for registration"
+    },
+    "usingOurServUAgree": "Пользуясь нашим сервисом вы соглашаетесь с нашими",
+    "@usingOurServUAgree": {
+        "description": "Label for using our services you agree"
+    },
+    "rules": "Правилами",
+    "@rules": {
+        "description": "Label for rules"
+    },
+    "and": "и",
+    "@and": {
+        "description": "Label for and"
+    },
+    "privacyPolicy": "Политикой конфиденциальности",
+    "@privacyPolicy": {
+        "description": "Label for privacy policy"
+    },
+    "signIn": "Войти",
+    "@signIn": {
+        "description": "Label for privacy sign in"
+    },
+    "thisFieldIsRequired": "Это поле обязательное",
+    "@thisFieldIsRequired": {
+        "description": "Label for privacy this field is required"
+    }
+}
