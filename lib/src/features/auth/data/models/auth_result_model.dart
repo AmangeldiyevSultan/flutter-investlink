@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:investlink/src/features/auth/data/model/token_pair_model.dart';
+import 'package:investlink/src/features/auth/data/models/token_pair_model.dart';
 
 part 'auth_result_model.g.dart';
 

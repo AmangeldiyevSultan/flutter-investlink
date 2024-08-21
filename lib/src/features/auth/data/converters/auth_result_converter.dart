@@ -1,5 +1,5 @@
 import 'package:investlink/src/core/architecture/data/converter/converter.dart';
-import 'package:investlink/src/features/auth/data/model/auth_result_model.dart';
+import 'package:investlink/src/features/auth/data/models/auth_result_model.dart';
 import 'package:investlink/src/features/auth/domain/entities/auth_result_entity.dart';
 import 'package:investlink/src/features/auth/domain/entities/token_pair_entity.dart';
 
