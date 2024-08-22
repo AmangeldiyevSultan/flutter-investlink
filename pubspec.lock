@@ -251,6 +251,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "8.1.6"
+  flutter_easy_dialogs:
+    dependency: "direct main"
+    description:
+      name: flutter_easy_dialogs
+      sha256: fc5451966c0f519b7c06580be2f2a5a49f128c4daf79e3f6da62e40a19a959f1
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -698,6 +706,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  rxdart:
+    dependency: "direct main"
+    description:
+      name: rxdart
+      sha256: "5c3004a4a8dbb94bd4bf5412a4def4acdaa12e12f269737a5751369e12d1a962"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.28.0"
   shared_preferences:
     dependency: "direct main"
     description:

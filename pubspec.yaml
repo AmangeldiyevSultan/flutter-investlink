@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_easy_dialogs: ^3.2.0
   flutter_localizations:
     sdk: flutter
   flutter_screenutil: ^5.9.3
@@ -33,6 +34,7 @@ dependencies:
   nested: ^1.0.0
   path: ^1.9.0
   provider: ^6.1.2
+  rxdart: ^0.28.0
   shared_preferences: ^2.3.2
 
 dev_dependencies:

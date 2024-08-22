@@ -39,7 +39,7 @@ abstract base class RestClientBase implements RestClient {
     final finalPath = p.canonicalize(p.join(baseUri.path, path));
 
     return baseUri.replace(
-      path: finalPath,
+      path: '$finalPath/',
       queryParameters: {
         ...baseUri.queryParameters,
         if (queryParams != null) ...queryParams,

@@ -14,6 +14,18 @@ abstract class DarkColorPalette {
   static const Color orangeF3CC50 = Color(0xffF3CC50);
 
   static const Color folly = Color(0xFFFF004D);
+
+  /// help
+  static const Color blue3282B8 = Color(0xff3282B8);
+
+  /// failure
+  static const Color redc72c41 = Color(0xffc72c41);
+
+  /// success
+  static const Color green2D6A4F = Color(0xff2D6A4F);
+
+  /// warning
+  static const Color yellowFCA652 = Color(0xffFCA652);
 }
 
 /// IMPORTANT! Don't use this directly for UI elements decorating.
@@ -40,4 +52,16 @@ abstract class ColorPalette {
   static const Color orangeF3CC50 = Color(0xffF3CC50);
 
   static const Color folly = Color(0xFFFF004D);
+
+  /// help
+  static const Color blue3282B8 = Color(0xff3282B8);
+
+  /// failure
+  static const Color redc72c41 = Color(0xffc72c41);
+
+  /// success
+  static const Color green2D6A4F = Color(0xff2D6A4F);
+
+  /// warning
+  static const Color yellowFCA652 = Color(0xffFCA652);
 }

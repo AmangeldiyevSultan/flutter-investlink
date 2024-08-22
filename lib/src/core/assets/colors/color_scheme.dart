@@ -26,6 +26,10 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.elevatedButtonBackgroundColor,
     required this.danger,
     required this.onDanger,
+    required this.helpBlue,
+    required this.failureRed,
+    required this.successGreen,
+    required this.warningYellow,
   });
 
   /// Base dark theme version.
@@ -40,7 +44,11 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         textBlue = DarkColorPalette.white,
         elevatedButtonBackgroundColor = DarkColorPalette.orangeF3CC50,
         danger = DarkColorPalette.folly,
-        onDanger = DarkColorPalette.folly;
+        onDanger = DarkColorPalette.folly,
+        helpBlue = DarkColorPalette.blue3282B8,
+        failureRed = DarkColorPalette.redc72c41,
+        successGreen = DarkColorPalette.green2D6A4F,
+        warningYellow = DarkColorPalette.yellowFCA652;
 
   /// Base light theme version.
   const AppColorScheme.light()
@@ -54,7 +62,11 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         textBlue = ColorPalette.blue4687F3,
         elevatedButtonBackgroundColor = ColorPalette.orangeF3CC50,
         danger = ColorPalette.folly,
-        onDanger = ColorPalette.folly;
+        onDanger = ColorPalette.folly,
+        helpBlue = ColorPalette.blue3282B8,
+        failureRed = ColorPalette.redc72c41,
+        successGreen = ColorPalette.green2D6A4F,
+        warningYellow = ColorPalette.yellowFCA652;
 
   final Color background;
 
@@ -78,6 +90,18 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
 
   final Color onDanger;
 
+  /// help
+  final Color helpBlue;
+
+  /// failure
+  final Color failureRed;
+
+  /// success
+  final Color successGreen;
+
+  /// warning
+  final Color warningYellow;
+
   @override
   ThemeExtension<AppColorScheme> copyWith({
     Color? background,
@@ -91,6 +115,10 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     Color? elevatedButtonBackgroundColor,
     Color? danger,
     Color? onDanger,
+    Color? helpBlue,
+    Color? failureRed,
+    Color? successGreen,
+    Color? warningYellow,
   }) {
     return AppColorScheme._(
       background: background ?? this.background,
@@ -105,6 +133,10 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
           elevatedButtonBackgroundColor ?? this.elevatedButtonBackgroundColor,
       danger: danger ?? this.danger,
       onDanger: onDanger ?? this.onDanger,
+      helpBlue: helpBlue ?? this.helpBlue,
+      failureRed: failureRed ?? this.failureRed,
+      successGreen: successGreen ?? this.successGreen,
+      warningYellow: warningYellow ?? this.warningYellow,
     );
   }
 
@@ -130,6 +162,10 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
           Color.lerp(elevatedButtonBackgroundColor, other.elevatedButtonBackgroundColor, t)!,
       danger: Color.lerp(danger, other.danger, t)!,
       onDanger: Color.lerp(onDanger, other.onDanger, t)!,
+      helpBlue: Color.lerp(helpBlue, other.helpBlue, t)!,
+      failureRed: Color.lerp(failureRed, other.failureRed, t)!,
+      successGreen: Color.lerp(successGreen, other.successGreen, t)!,
+      warningYellow: Color.lerp(warningYellow, other.warningYellow, t)!,
     );
   }
 

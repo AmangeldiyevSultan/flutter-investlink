@@ -9,6 +9,8 @@ import 'package:investlink/src/core/common/utils/logger/logger.dart';
 import 'package:investlink/src/features/auth/di/auth_scope.dart';
 import 'package:investlink/src/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:investlink/src/features/auth/presentation/widgets/auth_appbar.dart';
+import 'package:investlink/src/features/snackbar_queue/presentation/snack_message_type.dart';
+import 'package:investlink/src/features/snackbar_queue/presentation/snack_queue_provider.dart';
 import 'package:investlink/src/l10n/app_localizations_x.dart';
 import 'package:investlink/src/uikit/buttons/custom_elevated_button.dart';
 import 'package:investlink/src/uikit/buttons/custom_text_button.dart';
@@ -53,7 +55,10 @@ class _AuthScreenState extends State<AuthScreen> {
       listener: (context, authState) {
         authState.whenOrNull(
           idle: (authResult, error) {
-            if (error == null) {}
+            if (error != null) {
+              SnackQueueProvider.of(context)
+                  .addSnack(error.toString(), messageType: SnackMessageType.error);
+            }
           },
         );
       },

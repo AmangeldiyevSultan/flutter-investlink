@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easy_dialogs/flutter_easy_dialogs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investlink/src/core/assets/themes/theme_data.dart';
-import 'package:investlink/src/core/common/widgets/di_scope.dart';
 import 'package:investlink/src/core/router/routes.dart';
 import 'package:investlink/src/features/app/di/app_scope.dart';
-import 'package:investlink/src/features/auth/di/auth_scope.dart';
 import 'package:investlink/src/features/auth/presentation/screens/auth_flow.dart';
+import 'package:investlink/src/features/snackbar_queue/presentation/snack_queue_provider.dart';
 import 'package:investlink/src/features/theme_mode/presentation/widget/theme_mode_builder.dart';
 import 'package:nested/nested.dart';
 
@@ -44,39 +44,48 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return Nested(
-      children: [
-        DiScope<IAuthScope>(factory: (_) => AuthScope.create(context)),
-      ],
-      child: ThemeModeBuilder(
-        builder: (_, themeMode) {
-          return MaterialApp.router(
-            /// Navigation.
-            routerConfig: _router,
+    return ThemeModeBuilder(
+      builder: (_, themeMode) {
+        return MaterialApp.router(
+          /// Navigation.
+          routerConfig: _router,
 
-            ///? Both Light Theme
+          ///? Both Light Theme
 
-            theme: AppThemeData.lightTheme,
-            darkTheme: AppThemeData.lightTheme,
-            themeMode: themeMode,
-            debugShowCheckedModeBanner: false,
+          theme: AppThemeData.lightTheme,
+          darkTheme: AppThemeData.lightTheme,
+          themeMode: themeMode,
+          debugShowCheckedModeBanner: false,
 
-            builder: (builderContext, widget) {
-              final mediaQueryData = MediaQuery.of(builderContext);
+          builder: (builderContext, widget) {
+            final mediaQueryData = MediaQuery.of(builderContext);
+            final easyDialogsBuilder = FlutterEasyDialogs.builder();
 
-              return MediaQuery(
+            return Nested(
+              children: [
+                SnackQueueProvider(
+                  router: _router,
+                ),
+              ],
+              child: MediaQuery(
                 data: mediaQueryData.copyWith(textScaler: TextScaler.noScaling),
-                child: widget!,
-              );
-            },
+                child: Overlay(
+                  initialEntries: [
+                    OverlayEntry(
+                      builder: (overlayContext) => easyDialogsBuilder(overlayContext, widget),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
 
-            /// Localization.
-            locale: _localizations.firstOrNull,
-            localizationsDelegates: _localizationsDelegates,
-            supportedLocales: _localizations,
-          );
-        },
-      ),
+          /// Localization.
+          locale: _localizations.firstOrNull,
+          localizationsDelegates: _localizationsDelegates,
+          supportedLocales: _localizations,
+        );
+      },
     );
   }
 

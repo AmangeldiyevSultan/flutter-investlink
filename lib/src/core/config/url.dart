@@ -1,10 +1,10 @@
 /// Server url.
 enum Url {
   /// Dev url.
-  dev('https://app-alp-sb1.investlink.io'),
+  dev('https://app1-eu-sw1.ivlk.io'),
 
   /// Prod url.
-  prod('https://app-alp-sb1.investlink.io');
+  prod('https://app1-eu-sw1.ivlk.io');
 
   const Url(this.value);
 
