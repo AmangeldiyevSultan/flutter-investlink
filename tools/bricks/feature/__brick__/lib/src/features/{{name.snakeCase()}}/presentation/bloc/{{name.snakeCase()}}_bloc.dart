@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:investlink/src/features/{{{path}}}/data/repositories/{{name.snakeCase()}}_repository.dart';
+import 'package:investlink/src/features/{{{path}}}/domain/repositories/i_{{name.snakeCase()}}_repository.dart';
 
 part '{{name.snakeCase()}}_bloc.freezed.dart';
 
@@ -31,10 +31,10 @@ class {{name.pascalCase()}}State with _${{name.pascalCase()}}State {
 
 class {{name.pascalCase()}}Bloc extends Bloc<{{name.pascalCase()}}Event, {{name.pascalCase()}}State> {
   {{name.pascalCase()}}Bloc({
-    required {{name.pascalCase()}}Repository {{name.camelCase()}}Repository,
+    required I{{name.pascalCase()}}Repository {{name.camelCase()}}Repository,
   })  : _{{name.camelCase()}}Repository = {{name.camelCase()}}Repository,
         super(const {{name.pascalCase()}}State.processing());
 
-  final {{name.pascalCase()}}Repository _{{name.camelCase()}}Repository;
+  final I{{name.pascalCase()}}Repository _{{name.camelCase()}}Repository;
 
 }

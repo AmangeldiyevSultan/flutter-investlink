@@ -17,6 +17,7 @@ class DismissableListTile extends StatelessWidget {
     required this.formattedChangePerc,
     required this.todaysChangePerc,
     required this.formattedChange,
+    required this.onTap,
     super.key,
   });
 
@@ -25,6 +26,7 @@ class DismissableListTile extends StatelessWidget {
   final String formattedChangePerc;
   final double? todaysChangePerc;
   final String formattedChange;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -52,52 +54,55 @@ class DismissableListTile extends StatelessWidget {
       onDismissed: (direction) {
         context.read<IDatabaseScope>().tickersCubit.removeFromFavorites(ticker.ticker!);
       },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: DText(
-                ticker.ticker ?? '',
-                style: AppTextTheme.of(context).bold14,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: DText(
+                  ticker.ticker ?? '',
+                  style: AppTextTheme.of(context).bold14,
+                ),
               ),
-            ),
-            Row(
-              children: [
-                DText(
-                  formattedTickerPrevDayO,
-                  style: AppTextTheme.of(context).bold14.copyWith(
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                ),
-                const Gap(10),
-                SizedBox(
-                  width: 70,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      DText(
-                        formattedChangePerc,
-                        style: AppTextTheme.of(context).bold14.copyWith(
-                              overflow: TextOverflow.ellipsis,
-                              color: todaysChangePerc == null
-                                  ? AppColorScheme.of(context).greenAccent
-                                  : todaysChangePerc! >= 0
-                                      ? AppColorScheme.of(context).greenAccent
-                                      : AppColorScheme.of(context).failureRed,
-                            ),
-                      ),
-                      DText(
-                        formattedChange,
-                        style: AppTextTheme.of(context).regular10,
-                      ),
-                    ],
+              Row(
+                children: [
+                  DText(
+                    formattedTickerPrevDayO,
+                    style: AppTextTheme.of(context).bold14.copyWith(
+                          overflow: TextOverflow.ellipsis,
+                        ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const Gap(10),
+                  SizedBox(
+                    width: 70,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        DText(
+                          formattedChangePerc,
+                          style: AppTextTheme.of(context).bold14.copyWith(
+                                overflow: TextOverflow.ellipsis,
+                                color: todaysChangePerc == null
+                                    ? AppColorScheme.of(context).greenAccent
+                                    : todaysChangePerc! >= 0
+                                        ? AppColorScheme.of(context).greenAccent
+                                        : AppColorScheme.of(context).failureRed,
+                              ),
+                        ),
+                        DText(
+                          formattedChange,
+                          style: AppTextTheme.of(context).regular10,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

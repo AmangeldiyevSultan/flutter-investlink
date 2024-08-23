@@ -28,4 +28,10 @@ extension BuildTypeX on BuildType {
         BuildType.dev => Url.dev,
         BuildType.prod => Url.prod,
       };
+
+  /// Default url for build type.
+  SocketUrl get defaultSocketUrl => switch (this) {
+        BuildType.dev => SocketUrl.dev,
+        BuildType.prod => SocketUrl.prod,
+      };
 }

@@ -33,6 +33,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.pincodeBorder,
     required this.secondartTextColor,
     required this.greenAccent,
+    required this.dividerColor,
   });
 
   /// Base dark theme version.
@@ -54,7 +55,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         warningYellow = DarkColorPalette.yellowFCA652,
         pincodeBorder = DarkColorPalette.greyDFE1E8,
         secondartTextColor = DarkColorPalette.purple9191B5,
-        greenAccent = DarkColorPalette.green63BE37;
+        greenAccent = DarkColorPalette.green63BE37,
+        dividerColor = DarkColorPalette.greyF6F7FA;
 
   /// Base light theme version.
   const AppColorScheme.light()
@@ -75,7 +77,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         warningYellow = ColorPalette.yellowFCA652,
         pincodeBorder = ColorPalette.greyDFE1E8,
         secondartTextColor = ColorPalette.purple9191B5,
-        greenAccent = ColorPalette.green63BE37;
+        greenAccent = ColorPalette.green63BE37,
+        dividerColor = ColorPalette.greyF6F7FA;
 
   final Color background;
 
@@ -117,6 +120,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
 
   final Color greenAccent;
 
+  final Color dividerColor;
+
   @override
   ThemeExtension<AppColorScheme> copyWith({
     Color? background,
@@ -137,6 +142,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     Color? pincodeBorder,
     Color? secondartTextColor,
     Color? greenAccent,
+    Color? dividerColor,
   }) {
     return AppColorScheme._(
       background: background ?? this.background,
@@ -158,6 +164,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       pincodeBorder: pincodeBorder ?? this.pincodeBorder,
       secondartTextColor: secondartTextColor ?? this.secondartTextColor,
       greenAccent: greenAccent ?? this.greenAccent,
+      dividerColor: dividerColor ?? this.dividerColor,
     );
   }
 
@@ -190,6 +197,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       pincodeBorder: Color.lerp(pincodeBorder, other.pincodeBorder, t)!,
       secondartTextColor: Color.lerp(secondartTextColor, other.secondartTextColor, t)!,
       greenAccent: Color.lerp(greenAccent, other.greenAccent, t)!,
+      dividerColor: Color.lerp(dividerColor, other.dividerColor, t)!,
     );
   }
 

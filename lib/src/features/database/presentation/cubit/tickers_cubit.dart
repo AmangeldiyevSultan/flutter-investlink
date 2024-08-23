@@ -33,7 +33,6 @@ class TickersCubit extends Cubit<TickersState> {
     required DatabaseRepository databaseRepository,
   })  : _databaseRepository = databaseRepository,
         super(const TickersState.initial()) {
-    loadFavoriteTickers();
     _listenToTickersStream();
   }
 

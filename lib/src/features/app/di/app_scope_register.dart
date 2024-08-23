@@ -45,11 +45,12 @@ final class AppScopeRegister {
 
   AppConfig _createAppConfig(Environment env, SharedPreferences prefs) {
     if (env.isProd && kReleaseMode) {
-      return AppConfig(url: env.buildType.defaultUrl);
+      return AppConfig(url: env.buildType.defaultUrl, socketUrl: env.buildType.defaultSocketUrl);
     }
 
     return AppConfig(
       url: env.buildType.defaultUrl,
+      socketUrl: env.buildType.defaultSocketUrl,
     );
   }
 }

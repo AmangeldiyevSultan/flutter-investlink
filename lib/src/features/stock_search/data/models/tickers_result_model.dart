@@ -1,5 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:investlink/src/features/stock_search/data/models/tickers_model.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'tickers_result_model.g.dart';
 

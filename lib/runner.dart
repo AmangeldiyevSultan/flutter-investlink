@@ -6,6 +6,7 @@ import 'package:investlink/src/core/config/environment/environment.dart';
 import 'package:investlink/src/features/app/app_flow.dart';
 import 'package:investlink/src/features/app/di/app_scope_register.dart';
 import 'package:investlink/src/features/database/di/database_scope_register.dart';
+import 'package:investlink/src/features/socket/di/socket_scope_register.dart';
 
 /// App launch.
 Future<void> run(Environment env) async {
@@ -23,10 +24,14 @@ Future<void> _runApp(Environment env) async {
   const dataScopeRegister = DatabaseScopeRegister();
   final databaseScope = await dataScopeRegister.createScope();
 
+  const socketScopeRegister = SocketScopeRegister();
+  final socketScope = await socketScopeRegister.createScope(appScope);
+
   runApp(
     AppFlow(
       appScope: appScope,
       databaseScope: databaseScope,
+      socketScope: socketScope,
     ),
   );
 }

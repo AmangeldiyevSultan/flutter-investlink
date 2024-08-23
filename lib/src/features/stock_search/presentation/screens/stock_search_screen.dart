@@ -142,7 +142,7 @@ class _StockSearchScreenState extends State<StockSearchScreen> {
                           },
                           separatorBuilder: (context, index) {
                             return Divider(
-                              color: AppColorScheme.of(context).textFieldBorderColor,
+                              color: AppColorScheme.of(context).dividerColor,
                               height: 1,
                               indent: 5,
                               endIndent: 5,

@@ -1,10 +1,10 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:investlink/src/features/stock_search/data/models/day_model.dart';
 import 'package:investlink/src/features/stock_search/data/models/last_quote_model.dart';
 import 'package:investlink/src/features/stock_search/data/models/last_trade_model.dart';
 import 'package:investlink/src/features/stock_search/data/models/min_model.dart';
 import 'package:investlink/src/features/stock_search/data/models/prevday_model.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'tickers_model.g.dart';
 

@@ -103,5 +103,37 @@
     "delete": "Удалить",
     "@delete": {
         "description": "Label for privacy delete"
+    },
+    "day": "День",
+    "@day": {
+        "description": "Label for privacy day"
+    },
+    "week": "Неделя",
+    "@week": {
+        "description": "Label for privacy week"
+    },
+    "month": "Месяц",
+    "@month": {
+        "description": "Label for privacy month"
+    },
+    "year": "Год",
+    "@year": {
+        "description": "Label for privacy year"
+    },
+    "high": "High",
+    "@high": {
+        "description": "Label for privacy high"
+    },
+    "low": "Low",
+    "@low": {
+        "description": "Label for privacy low"
+    },
+    "open": "Open",
+    "@open": {
+        "description": "Label for privacy open"
+    },
+    "close": "Close",
+    "@close": {
+        "description": "Label for privacy close"
     }
 }

@@ -5,6 +5,8 @@ import 'package:investlink/src/features/auth/presentation/screens/auth_flow.dart
 import 'package:investlink/src/features/pincode/presentation/screens/pincode_flow.dart';
 import 'package:investlink/src/features/splash/screens/splash_screen.dart';
 import 'package:investlink/src/features/stock/presentation/screens/stock_flow.dart';
+import 'package:investlink/src/features/stock_details/presentation/screens/stock_details_flow.dart';
+import 'package:investlink/src/features/stock_search/domain/entities/tickers_entity.dart';
 import 'package:investlink/src/features/stock_search/presentation/screens/stock_search_flow.dart';
 
 part 'routes.g.dart';
@@ -52,5 +54,16 @@ class PincodeRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) => PincodeFlow(
         isPincodeCreationRequired: $extra ?? false,
+      );
+}
+
+@TypedGoRoute<StockDetailsRoute>(path: StockDetailsFlow.routePath, name: StockDetailsFlow.routeName)
+class StockDetailsRoute extends GoRouteData {
+  const StockDetailsRoute(this.$extra);
+
+  final TickersEntity? $extra;
+  @override
+  Widget build(BuildContext context, GoRouterState state) => StockDetailsFlow(
+        tickersEntity: $extra!,
       );
 }

@@ -6,6 +6,9 @@ class ApiPath {
 
   ///* Stock Search
   static const String stockSearch = '/proxy_api/v1/polygon/tickers_currency';
+
+  ///* Ticker History
+  static const String tickerHistory = '/proxy_api/v1/polygon/ticker_history';
 }
 
 class DatabasePath {
@@ -13,4 +16,11 @@ class DatabasePath {
 
   ///* Favorites
   static const String favoriteTickers = 'favorite-tickers';
+}
+
+class WebSocketPath {
+  const WebSocketPath._();
+
+  ///* Favorites
+  static const String connection = '/ws/stocks/';
 }
