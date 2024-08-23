@@ -40,7 +40,7 @@ final class {{name.pascalCase()}}Scope extends DisposableObject implements I{{na
   final {{name.pascalCase()}}Bloc _{{name.camelCase()}}Bloc;
 
   @override
-  late final {{name.pascalCase()}}Bloc {{name.camelCase()}}Bloc;
+  late final {{name.pascalCase()}}Bloc {{name.camelCase()}}Bloc = _{{name.camelCase()}}Bloc;
 }
 
 /// Scope dependencies of the {{name.pascalCase()}} feature.

@@ -24,6 +24,7 @@ class CtmTextField extends StatelessWidget {
     this.onTapOutside,
     this.keyboardType,
     this.onChanged,
+    this.textAlignVertical,
     this.isDense = true,
     this.contentPadding,
     this.validator,
@@ -32,6 +33,7 @@ class CtmTextField extends StatelessWidget {
     this.maxLength,
     this.cursorHeight,
     this.buildCounter,
+    this.hintText,
     this.counter,
     super.key,
   });
@@ -44,6 +46,7 @@ class CtmTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Color? borderColor;
   final Color? hintColor;
+  final String? hintText;
   final bool? readOnly;
   final VoidCallback? onTap;
   final void Function(String)? onChanged;
@@ -63,6 +66,7 @@ class CtmTextField extends StatelessWidget {
   final bool filled;
   final bool isDense;
   final Widget? counter;
+  final TextAlignVertical? textAlignVertical;
   final Widget? Function(
     BuildContext, {
     required int currentLength,
@@ -73,6 +77,7 @@ class CtmTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textAlignVertical: textAlignVertical,
       controller: controller,
       readOnly: readOnly!,
       cursorHeight: cursorHeight,
@@ -95,7 +100,7 @@ class CtmTextField extends StatelessWidget {
           color: borderColor ?? AppColorScheme.of(context).hintColor,
           fontWeight: FontWeight.normal,
         ),
-        hintText: labelText,
+        hintText: hintText ?? labelText,
         hintStyle: TextStyle(
           color: borderColor ?? AppColorScheme.of(context).hintColor,
           fontWeight: FontWeight.normal,

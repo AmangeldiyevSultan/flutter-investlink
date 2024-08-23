@@ -49,8 +49,8 @@ class CupertinoTransitionPage<T> extends Page<T> {
   }
 }
 
-class BottomTransitionPage<T> extends Page<T> {
-  const BottomTransitionPage({
+class RightTransitionPage<T> extends Page<T> {
+  const RightTransitionPage({
     required this.child,
     this.transitionDuration,
     super.key,
@@ -64,7 +64,7 @@ class BottomTransitionPage<T> extends Page<T> {
       settings: this,
       pageBuilder: (context, animation, secondaryAnimation) => child,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0, 1);
+        const begin = Offset(1, 0);
         const end = Offset.zero;
         const curve = Curves.fastOutSlowIn;
 

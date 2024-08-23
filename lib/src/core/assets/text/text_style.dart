@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 /// App text style.
 enum AppTextStyle {
+  regular10(TextStyle(fontSize: 10, height: 1.40)),
   regular12(TextStyle(fontSize: 12, height: 1.40)),
   regular14(TextStyle(fontSize: 14, height: 1.40)),
   regular16(TextStyle(fontSize: 16, height: 1.24)),
   regular18(TextStyle(fontSize: 18, height: 1.24)),
+  regular26(TextStyle(fontSize: 26, height: 1.24)),
 
   medium14(TextStyle(fontSize: 14, height: 1.40, fontWeight: FontWeight.w500)),
   medium16(TextStyle(fontSize: 16, height: 1.24, fontWeight: FontWeight.w500)),

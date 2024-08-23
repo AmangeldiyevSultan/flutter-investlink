@@ -26,6 +26,12 @@ abstract class DarkColorPalette {
 
   /// warning
   static const Color yellowFCA652 = Color(0xffFCA652);
+
+  static const Color greyDFE1E8 = Color(0xffDFE1E8);
+
+  static const Color purple9191B5 = Color(0xff9191B5);
+
+  static const Color green63BE37 = Color(0xff63BE37);
 }
 
 /// IMPORTANT! Don't use this directly for UI elements decorating.
@@ -64,4 +70,10 @@ abstract class ColorPalette {
 
   /// warning
   static const Color yellowFCA652 = Color(0xffFCA652);
+
+  static const Color greyDFE1E8 = Color(0xffDFE1E8);
+
+  static const Color purple9191B5 = Color(0xff9191B5);
+
+  static const Color green63BE37 = Color(0xff63BE37);
 }

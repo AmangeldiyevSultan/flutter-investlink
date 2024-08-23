@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:investlink/src/core/assets/colors/color_scheme.dart';
 import 'package:investlink/src/core/assets/media_res/svg.dart';
 import 'package:investlink/src/core/assets/text/text_extension.dart';
 import 'package:investlink/src/core/common/utils/logger/logger.dart';
+import 'package:investlink/src/core/persistence/tokens_storage/auth_token_pair.dart';
 import 'package:investlink/src/features/auth/di/auth_scope.dart';
 import 'package:investlink/src/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:investlink/src/features/auth/presentation/widgets/auth_appbar.dart';
+import 'package:investlink/src/features/pincode/presentation/screens/pincode_flow.dart';
 import 'package:investlink/src/features/snackbar_queue/presentation/snack_message_type.dart';
 import 'package:investlink/src/features/snackbar_queue/presentation/snack_queue_provider.dart';
 import 'package:investlink/src/l10n/app_localizations_x.dart';
@@ -52,16 +55,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       bloc: _authBloc,
-      listener: (context, authState) {
-        authState.whenOrNull(
-          idle: (authResult, error) {
-            if (error != null) {
-              SnackQueueProvider.of(context)
-                  .addSnack(error.toString(), messageType: SnackMessageType.error);
-            }
-          },
-        );
-      },
+      listener: _authListener,
       builder: (context, authState) {
         return LoadingStack(
           isLoading: authState.isProcessing,
@@ -130,6 +124,43 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ),
         );
+      },
+    );
+  }
+
+  void _authListener(_, AuthState authState) {
+    authState.whenOrNull(
+      idle: (authResult, error) async {
+        if (error != null) {
+          SnackQueueProvider.of(context)
+              .addSnack(error.toString(), messageType: SnackMessageType.error);
+          return;
+        }
+        if (authResult != null) {
+          try {
+            await context.read<IAuthScope>().tokenStorage.write(
+                  AuthTokenPair(
+                    accessToken: authResult.tokens.access,
+                    refreshToken: authResult.tokens.access,
+                  ),
+                );
+            if (mounted) {
+              context.go(PincodeFlow.routePath, extra: true);
+            }
+          } catch (e, stackTrace) {
+            logger.error(
+              'Error while writing tokens to storage',
+              error: e,
+              stackTrace: stackTrace,
+            );
+            if (mounted) {
+              SnackQueueProvider.of(context).addSnack(
+                e.toString(),
+                messageType: SnackMessageType.error,
+              );
+            }
+          }
+        }
       },
     );
   }

@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:investlink/src/core/components/api/app_dio_configurator.dart';
+import 'package:investlink/src/core/components/interceptors/auth_interceptor.dart';
 import 'package:investlink/src/core/config/app_config.dart';
 import 'package:investlink/src/core/config/environment/environment.dart';
+import 'package:investlink/src/core/persistence/tokens_storage/token_storage_impl.dart';
 import 'package:investlink/src/features/app/di/app_scope.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,10 +20,14 @@ final class AppScopeRegister {
   /// Create scope.
   Future<IAppScope> createScope(Environment env) async {
     final sharedPreferences = await SharedPreferences.getInstance();
+    const secureStorage = FlutterSecureStorage();
     final appConfig = _createAppConfig(env, sharedPreferences);
 
     const dioConfigurator = AppDioConfigurator();
-    final interceptors = <Interceptor>[];
+    const tokenStorage = TokenStorageImpl(secureStorage);
+    final interceptors = <Interceptor>[
+      AuthInterceptor<void>(tokenStorage: tokenStorage),
+    ];
     final dio = dioConfigurator.create(
       interceptors: interceptors,
       url: appConfig.url.value,
@@ -32,6 +39,7 @@ final class AppScopeRegister {
       appConfig: appConfig,
       sharedPreferences: sharedPreferences,
       dio: dio,
+      secureStorage: secureStorage,
     );
   }
 

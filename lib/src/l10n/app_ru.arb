@@ -55,5 +55,53 @@
     "thisFieldIsRequired": "Это поле обязательное",
     "@thisFieldIsRequired": {
         "description": "Label for privacy this field is required"
+    },
+    "pincodeSetup": "Установка PIN-кода",
+    "@pincodeSetup": {
+        "description": "Label for privacy set pin code"
+    },
+    "repeatPincodeSetup": "Повторите PIN-кода",
+    "@repeatPincodeSetup": {
+        "description": "Label for privacy repeat pin code"
+    },
+    "enterPincode": "Введите PIN-код",
+    "@enterPincode": {
+        "description": "Label for privacy enter pin code"
+    },
+    "createPincodeToEnter": "Придумайте код для быстрого доступа",
+    "@createPincodeToEnter": {
+        "description": "Label for privacy create pin code to enter"
+    },
+    "reenterPincodeToEnter": "Повторите код для быстрого доступа",
+    "@reenterPincodeToEnter": {
+        "description": "Label for privacy reenter pin code to enter"
+    },
+    "skip": "Пропустить",
+    "@skip": {
+        "description": "Label for privacy skip"
+    },
+    "stock": "Акции",
+    "@stock": {
+        "description": "Label for privacy stock"
+    },
+    "tickerName": "Тикер / Название",
+    "@tickerName": {
+        "description": "Label for privacy ticker name"
+    },
+    "price": "Цена",
+    "@price": {
+        "description": "Label for privacy price"
+    },
+    "changes": "Изм",
+    "@changes": {
+        "description": "Label for privacy changes"
+    },
+    "cancel": "Отмена",
+    "@cancel": {
+        "description": "Label for privacy cancel"
+    },
+    "delete": "Удалить",
+    "@delete": {
+        "description": "Label for privacy delete"
     }
 }

@@ -4,10 +4,12 @@ import 'package:investlink/src/core/assets/text/text_style.dart';
 /// App text style scheme.
 class AppTextTheme extends ThemeExtension<AppTextTheme> {
   AppTextTheme._({
+    required this.regular10,
     required this.regular12,
     required this.regular14,
     required this.regular16,
     required this.regular18,
+    required this.regular26,
     required this.medium14,
     required this.medium16,
     required this.medium20,
@@ -22,10 +24,12 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
 
   /// Base app text theme.
   AppTextTheme.base()
-      : regular12 = AppTextStyle.regular12.value,
+      : regular10 = AppTextStyle.regular10.value,
+        regular12 = AppTextStyle.regular12.value,
         regular14 = AppTextStyle.regular14.value,
         regular16 = AppTextStyle.regular16.value,
         regular18 = AppTextStyle.regular18.value,
+        regular26 = AppTextStyle.regular26.value,
         medium14 = AppTextStyle.medium14.value,
         medium16 = AppTextStyle.medium16.value,
         medium20 = AppTextStyle.medium20.value,
@@ -36,6 +40,9 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
         bold20 = AppTextStyle.bold20.value,
         bold26 = AppTextStyle.bold26.value,
         bold32 = AppTextStyle.bold32.value;
+
+  /// Text style 10_140.
+  final TextStyle regular10;
 
   /// Text style 12_140.
   final TextStyle regular12;
@@ -48,6 +55,9 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
 
   /// Text style 18_124.
   final TextStyle regular18;
+
+  /// Text style 26_124.
+  final TextStyle regular26;
 
   /// Text style 14_140_500.
   final TextStyle medium14;
@@ -89,10 +99,12 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
     }
 
     return AppTextTheme._(
+      regular10: TextStyle.lerp(regular10, other.regular10, t)!,
       regular12: TextStyle.lerp(regular12, other.regular12, t)!,
       regular14: TextStyle.lerp(regular14, other.regular14, t)!,
       regular16: TextStyle.lerp(regular16, other.regular16, t)!,
       regular18: TextStyle.lerp(regular18, other.regular16, t)!,
+      regular26: TextStyle.lerp(regular26, other.regular16, t)!,
       medium14: TextStyle.lerp(medium14, other.medium14, t)!,
       medium16: TextStyle.lerp(medium16, other.medium16, t)!,
       medium20: TextStyle.lerp(medium20, other.medium20, t)!,
@@ -114,10 +126,12 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
   /// @nodoc.
   @override
   ThemeExtension<AppTextTheme> copyWith({
+    TextStyle? regular10,
     TextStyle? regular12,
     TextStyle? regular14,
     TextStyle? regular16,
     TextStyle? regular18,
+    TextStyle? regular26,
     TextStyle? medium14,
     TextStyle? medium16,
     TextStyle? medium20,
@@ -130,10 +144,12 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
     TextStyle? bold32,
   }) {
     return AppTextTheme._(
+      regular10: regular10 ?? this.regular10,
       regular12: regular12 ?? this.regular12,
       regular14: regular14 ?? this.regular14,
       regular16: regular16 ?? this.regular16,
       regular18: regular18 ?? this.regular18,
+      regular26: regular26 ?? this.regular26,
       medium14: medium14 ?? this.medium14,
       medium16: medium16 ?? this.medium16,
       medium20: medium20 ?? this.medium20,

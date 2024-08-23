@@ -14,7 +14,7 @@ final class AuthRepository implements IAuthRepository {
 
   final RestClient _client;
 
-  final authResultConverter = const AuthResultConverter();
+  final _authResultConverter = const AuthResultConverter();
 
   @override
   Future<AuthResultEntity> signIn({
@@ -31,6 +31,6 @@ final class AuthRepository implements IAuthRepository {
 
     final result = AuthResultModel.fromJson(reponse! as Map<String, dynamic>);
 
-    return authResultConverter.convert(result);
+    return _authResultConverter.convert(result);
   }
 }

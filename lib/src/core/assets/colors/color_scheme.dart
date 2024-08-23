@@ -30,6 +30,9 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.failureRed,
     required this.successGreen,
     required this.warningYellow,
+    required this.pincodeBorder,
+    required this.secondartTextColor,
+    required this.greenAccent,
   });
 
   /// Base dark theme version.
@@ -48,7 +51,10 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         helpBlue = DarkColorPalette.blue3282B8,
         failureRed = DarkColorPalette.redc72c41,
         successGreen = DarkColorPalette.green2D6A4F,
-        warningYellow = DarkColorPalette.yellowFCA652;
+        warningYellow = DarkColorPalette.yellowFCA652,
+        pincodeBorder = DarkColorPalette.greyDFE1E8,
+        secondartTextColor = DarkColorPalette.purple9191B5,
+        greenAccent = DarkColorPalette.green63BE37;
 
   /// Base light theme version.
   const AppColorScheme.light()
@@ -66,7 +72,10 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         helpBlue = ColorPalette.blue3282B8,
         failureRed = ColorPalette.redc72c41,
         successGreen = ColorPalette.green2D6A4F,
-        warningYellow = ColorPalette.yellowFCA652;
+        warningYellow = ColorPalette.yellowFCA652,
+        pincodeBorder = ColorPalette.greyDFE1E8,
+        secondartTextColor = ColorPalette.purple9191B5,
+        greenAccent = ColorPalette.green63BE37;
 
   final Color background;
 
@@ -102,6 +111,12 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   /// warning
   final Color warningYellow;
 
+  final Color pincodeBorder;
+
+  final Color secondartTextColor;
+
+  final Color greenAccent;
+
   @override
   ThemeExtension<AppColorScheme> copyWith({
     Color? background,
@@ -119,6 +134,9 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     Color? failureRed,
     Color? successGreen,
     Color? warningYellow,
+    Color? pincodeBorder,
+    Color? secondartTextColor,
+    Color? greenAccent,
   }) {
     return AppColorScheme._(
       background: background ?? this.background,
@@ -137,6 +155,9 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       failureRed: failureRed ?? this.failureRed,
       successGreen: successGreen ?? this.successGreen,
       warningYellow: warningYellow ?? this.warningYellow,
+      pincodeBorder: pincodeBorder ?? this.pincodeBorder,
+      secondartTextColor: secondartTextColor ?? this.secondartTextColor,
+      greenAccent: greenAccent ?? this.greenAccent,
     );
   }
 
@@ -166,6 +187,9 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       failureRed: Color.lerp(failureRed, other.failureRed, t)!,
       successGreen: Color.lerp(successGreen, other.successGreen, t)!,
       warningYellow: Color.lerp(warningYellow, other.warningYellow, t)!,
+      pincodeBorder: Color.lerp(pincodeBorder, other.pincodeBorder, t)!,
+      secondartTextColor: Color.lerp(secondartTextColor, other.secondartTextColor, t)!,
+      greenAccent: Color.lerp(greenAccent, other.greenAccent, t)!,
     );
   }
 

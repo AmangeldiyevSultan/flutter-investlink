@@ -108,7 +108,6 @@ abstract base class Logger {
     String message, {
     Object? error,
     StackTrace? stackTrace,
-    bool sendToCrashlytics = true,
   });
 
   /// Logs the warning to the console
@@ -134,7 +133,6 @@ abstract base class Logger {
     this.error(
       'Top-level error: $error',
       stackTrace: stackTrace,
-      sendToCrashlytics: false,
     );
   }
 
@@ -143,7 +141,6 @@ abstract base class Logger {
     error(
       details.exceptionAsString(),
       stackTrace: details.stack,
-      sendToCrashlytics: false,
     );
   }
 
@@ -153,7 +150,6 @@ abstract base class Logger {
       'PlatformDispatcherError',
       error: error,
       stackTrace: stackTrace,
-      sendToCrashlytics: false,
     );
     return true;
   }
@@ -171,7 +167,6 @@ final class LoggerLogging extends Logger {
     String message, {
     Object? error,
     StackTrace? stackTrace,
-    bool sendToCrashlytics = true,
   }) {
     _logger.severe(message, error, stackTrace);
   }

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:investlink/src/core/config/app_config.dart';
 import 'package:investlink/src/core/config/environment/environment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +14,7 @@ final class AppScope implements IAppScope {
     required this.appConfig,
     required this.sharedPreferences,
     required this.dio,
+    required this.secureStorage,
   });
 
   @override
@@ -23,6 +25,8 @@ final class AppScope implements IAppScope {
   final SharedPreferences sharedPreferences;
   @override
   final Dio dio;
+  @override
+  final FlutterSecureStorage secureStorage;
 }
 
 /// {@macro app_scope.class}
@@ -38,4 +42,7 @@ abstract interface class IAppScope {
 
   /// Shared preferences.
   SharedPreferences get sharedPreferences;
+
+  /// Secure storage.
+  FlutterSecureStorage get secureStorage;
 }

@@ -1,5 +1,3 @@
-// ignore_for_file: sort_constructors_first
-
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -45,8 +43,8 @@ enum TokensStorageKeys {
   /// @nodoc
   authToken('app_auth_token');
 
+  const TokensStorageKeys(this.keyName);
+
   /// Key name
   final String keyName;
-
-  const TokensStorageKeys(this.keyName);
 }
