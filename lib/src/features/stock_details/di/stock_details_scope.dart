@@ -5,7 +5,7 @@ import 'package:investlink/src/core/common/utils/disposable_object/i_disposable_
 import 'package:investlink/src/core/components/rest_client/rest_client_dio.dart';
 import 'package:investlink/src/features/app/di/app_scope.dart';
 import 'package:investlink/src/features/stock_details/data/repositories/stock_details_repository.dart';
-import 'package:investlink/src/features/stock_details/presentation/cubit/stock_details_cubit.dart';
+import 'package:investlink/src/features/stock_details/presentation/bloc/stock_details_cubit.dart';
 
 /// {@template stock_details_scope.class}
 /// Implementation of [IStockDetailsScope].

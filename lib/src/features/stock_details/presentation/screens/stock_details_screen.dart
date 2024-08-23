@@ -10,7 +10,7 @@ import 'package:investlink/src/core/assets/text/text_extension.dart';
 import 'package:investlink/src/features/snackbar_queue/presentation/snack_message_type.dart';
 import 'package:investlink/src/features/snackbar_queue/presentation/snack_queue_provider.dart';
 import 'package:investlink/src/features/stock_details/di/stock_details_scope.dart';
-import 'package:investlink/src/features/stock_details/presentation/cubit/stock_details_cubit.dart';
+import 'package:investlink/src/features/stock_details/presentation/bloc/stock_details_cubit.dart';
 import 'package:investlink/src/features/stock_details/presentation/widgets/stock_detail_appbar.dart';
 import 'package:investlink/src/features/stock_search/domain/entities/tickers_entity.dart';
 import 'package:investlink/src/l10n/app_localizations_x.dart';

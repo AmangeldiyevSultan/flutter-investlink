@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:investlink/src/core/router/custom_router.dart';
 import 'package:investlink/src/features/auth/presentation/screens/auth_flow.dart';
 import 'package:investlink/src/features/pincode/presentation/screens/pincode_flow.dart';
-import 'package:investlink/src/features/splash/screens/splash_screen.dart';
+import 'package:investlink/src/features/splash/presentation/screen/splash_flow.dart';
 import 'package:investlink/src/features/stock/presentation/screens/stock_flow.dart';
 import 'package:investlink/src/features/stock_details/presentation/screens/stock_details_flow.dart';
 import 'package:investlink/src/features/stock_search/domain/entities/tickers_entity.dart';
@@ -11,10 +11,10 @@ import 'package:investlink/src/features/stock_search/presentation/screens/stock_
 
 part 'routes.g.dart';
 
-@TypedGoRoute<InitialRoute>(path: '/', name: 'initial')
-class InitialRoute extends GoRouteData {
+@TypedGoRoute<SplashRoute>(path: SplashFlow.routePath, name: SplashFlow.routeName)
+class SplashRoute extends GoRouteData {
   @override
-  Widget build(BuildContext context, GoRouterState state) => const SplashScreen();
+  Widget build(BuildContext context, GoRouterState state) => const SplashFlow();
 }
 
 @TypedGoRoute<AuthRoute>(path: AuthFlow.routePath, name: AuthFlow.routeName)

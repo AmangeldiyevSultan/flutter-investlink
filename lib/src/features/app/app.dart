@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:investlink/src/core/assets/themes/theme_data.dart';
 import 'package:investlink/src/core/router/routes.dart';
 import 'package:investlink/src/features/app/di/app_scope.dart';
-import 'package:investlink/src/features/pincode/presentation/screens/pincode_flow.dart';
 import 'package:investlink/src/features/snackbar_queue/presentation/snack_queue_provider.dart';
 import 'package:investlink/src/features/theme_mode/presentation/widget/theme_mode_builder.dart';
 import 'package:nested/nested.dart';
@@ -97,7 +96,7 @@ class _AppState extends State<App> {
       routes: $appRoutes,
       redirect: (context, state) async {
         if (state.matchedLocation == '/') {
-          return PincodeFlow.routePath;
+          return '/';
         }
         return null;
       },
