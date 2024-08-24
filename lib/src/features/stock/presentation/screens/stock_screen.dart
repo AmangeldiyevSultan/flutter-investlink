@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -35,6 +37,33 @@ class StockScreen extends StatefulWidget {
 }
 
 class _StockScreenState extends State<StockScreen> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      final tickers = context.read<IDatabaseScope>().tickersCubit.state.tickers;
+      if (tickers.isNotEmpty) {
+        context.read<ISocketScope>().socketBloc.add(
+              SocketEvent.send(
+                tickers: tickers.map((e) => e.ticker!).toList(),
+              ),
+            );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -43,114 +72,101 @@ class _StockScreenState extends State<StockScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SocketBloc, SocketState>(
-      bloc: context.read<ISocketScope>().socketBloc,
-      listener: (context, state) {
-        state.whenOrNull();
-      },
-      child: Scaffold(
-        backgroundColor: AppColorScheme.of(context).textFieldBackground,
-        appBar: StockAppbar(
-          onPressed: () => context.push(StockSearchFlow.routePath),
-        ),
-        body: BlocConsumer<TickersCubit, TickersState>(
-          bloc: context.read<IDatabaseScope>().tickersCubit,
-          listener: (context, tickersState) {
-            tickersState.whenOrNull(
-              idle: (tickers, error) {
-                if (error != null) {
-                  SnackQueueProvider.of(context).addSnack(
-                    error.toString(),
-                    messageType: SnackMessageType.error,
-                  );
-                }
-                if (tickers.isNotEmpty) {
-                  context.read<ISocketScope>().socketBloc.add(
-                        SocketEvent.send(
-                          tickers: tickers.map((e) => e.ticker!).toList(),
-                        ),
-                      );
-                }
-              },
-            );
-          },
-          builder: (context, tickersState) {
-            return Column(
-              children: [
-                const _StockHeader(),
-                Divider(
-                  color: AppColorScheme.of(context).dividerColor,
-                  thickness: .4,
-                  height: 1,
-                ),
-                Expanded(
-                  child: LoadingStack(
-                    isLoading: tickersState.isProcessing,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: ListView.separated(
-                        itemCount: tickersState.tickers.length,
-                        itemBuilder: (context, index) {
-                          final ticker = tickersState.tickers[index];
+    return Scaffold(
+      backgroundColor: AppColorScheme.of(context).textFieldBackground,
+      appBar: StockAppbar(
+        onPressed: () => context.push(StockSearchFlow.routePath),
+      ),
+      body: BlocConsumer<TickersCubit, TickersState>(
+        bloc: context.read<IDatabaseScope>().tickersCubit,
+        listener: (context, tickersState) {
+          tickersState.whenOrNull(
+            idle: (tickers, error) {
+              if (error != null) {
+                SnackQueueProvider.of(context).addSnack(
+                  error.toString(),
+                  messageType: SnackMessageType.error,
+                );
+              }
+            },
+          );
+        },
+        builder: (context, tickersState) {
+          return Column(
+            children: [
+              const _StockHeader(),
+              Divider(
+                color: AppColorScheme.of(context).dividerColor,
+                thickness: .4,
+                height: 1,
+              ),
+              Expanded(
+                child: LoadingStack(
+                  isLoading: tickersState.isProcessing,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: ListView.separated(
+                      itemCount: tickersState.tickers.length,
+                      itemBuilder: (context, index) {
+                        final ticker = tickersState.tickers[index];
 
-                          final todaysChangePerc = ticker.todaysChangePerc;
-                          final todaysChange = ticker.todaysChange;
-                          final tickerPrevDayO = ticker.prevDay?.o;
+                        final todaysChangePerc = ticker.todaysChangePerc;
+                        final todaysChange = ticker.todaysChange;
+                        final tickerPrevDayO = ticker.prevDay?.o;
 
-                          // Format the percentage value
-                          var formattedChangePerc =
-                              NumberFormat.decimalPercentPattern(decimalDigits: 2)
-                                  .format(todaysChangePerc);
+                        // Format the percentage value
+                        var formattedChangePerc =
+                            NumberFormat.decimalPercentPattern(decimalDigits: 2)
+                                .format(todaysChangePerc);
 
-                          // Format the num value
-                          var formattedChange = NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                              .format(todaysChange);
+                        // Format the num value
+                        var formattedChange = NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                            .format(todaysChange);
 
-                          // Format the dollar value
-                          final formattedTickerPrevDayO =
-                              NumberFormat.simpleCurrency(decimalDigits: 2).format(tickerPrevDayO);
+                        // Format the dollar value
+                        final formattedTickerPrevDayO =
+                            NumberFormat.simpleCurrency(decimalDigits: 2).format(tickerPrevDayO);
 
-                          // Add the + sign if the value is positive
-                          if ((todaysChangePerc ?? 0) > 0) {
-                            formattedChangePerc = '+$formattedChangePerc';
-                          }
+                        // Add the + sign if the value is positive
+                        if ((todaysChangePerc ?? 0) > 0) {
+                          formattedChangePerc = '+$formattedChangePerc';
+                        }
 
-                          // Add the + sign if the value is positive
-                          if ((todaysChange ?? 0) > 0) {
-                            formattedChange = '+$formattedChange';
-                          }
+                        // Add the + sign if the value is positive
+                        if ((todaysChange ?? 0) > 0) {
+                          formattedChange = '+$formattedChange';
+                        }
 
-                          return Builder(
-                            builder: (context) {
-                              return DismissableListTile(
-                                ticker: ticker,
-                                formattedTickerPrevDayO: formattedTickerPrevDayO,
-                                formattedChangePerc: formattedChangePerc,
-                                todaysChangePerc: todaysChangePerc,
-                                formattedChange: formattedChange,
-                                onTap: () => context.push(
-                                  StockDetailsFlow.routePath,
-                                  extra: ticker,
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        separatorBuilder: (context, index) => Divider(
-                          color: AppColorScheme.of(context).secondartTextColor,
-                          thickness: .4,
-                          height: 1,
-                          indent: 5,
-                          endIndent: 5,
-                        ),
+                        return Builder(
+                          builder: (context) {
+                            return DismissableListTile(
+                              ticker: ticker,
+                              formattedTickerPrevDayO: formattedTickerPrevDayO,
+                              formattedChangePerc: formattedChangePerc,
+                              todaysChangePerc: todaysChangePerc,
+                              formattedChange: formattedChange,
+                              onTap: () => context.push(
+                                StockDetailsFlow.routePath,
+                                extra: ticker,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      separatorBuilder: (context, index) => Divider(
+                        color: AppColorScheme.of(context).secondartTextColor,
+                        thickness: .4,
+                        height: 1,
+                        indent: 5,
+                        endIndent: 5,
                       ),
                     ),
                   ),
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:investlink/src/features/database/data/repositories/database_repository.dart';
 import 'package:investlink/src/features/database/domain/repositories/i_database_repository.dart';
+import 'package:investlink/src/features/socket/domain/entities/socket_message_entity.dart';
 import 'package:investlink/src/features/stock_search/domain/entities/tickers_entity.dart';
 
 part 'tickers_cubit.freezed.dart';
@@ -81,6 +82,14 @@ class TickersCubit extends Cubit<TickersState> {
   Future<void> addToFavorites(TickersEntity ticker) async {
     try {
       await _databaseRepository.addTickerToFavorites(ticker);
+    } catch (e) {
+      emit(TickersState.idle(tickers: state.tickers, error: e));
+    }
+  }
+
+  Future<void> changeTickerFromFavorites(List<SocketMessageEntity> socketMessages) async {
+    try {
+      await _databaseRepository.changeFavoritesTicker(socketMessages);
     } catch (e) {
       emit(TickersState.idle(tickers: state.tickers, error: e));
     }

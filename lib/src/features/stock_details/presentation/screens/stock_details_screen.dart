@@ -7,6 +7,8 @@ import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:investlink/src/core/assets/colors/color_scheme.dart';
 import 'package:investlink/src/core/assets/text/text_extension.dart';
+import 'package:investlink/src/features/database/di/database_scope.dart';
+import 'package:investlink/src/features/database/presentation/cubit/tickers_cubit.dart';
 import 'package:investlink/src/features/snackbar_queue/presentation/snack_message_type.dart';
 import 'package:investlink/src/features/snackbar_queue/presentation/snack_queue_provider.dart';
 import 'package:investlink/src/features/stock_details/di/stock_details_scope.dart';
@@ -57,20 +59,43 @@ class _StockDetailsScreenState extends State<StockDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<StockDetailsCubit, StockDetailsState>(
-      bloc: context.read<IStockDetailsScope>().stockDetailsCubit,
-      listener: (context, stockDetailsState) {
-        stockDetailsState.whenOrNull(
-          idle: (tickerResult, dateRange, error) {
-            if (error != null) {
-              SnackQueueProvider.of(context).addSnack(
-                error.toString(),
-                messageType: SnackMessageType.error,
-              );
-            }
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<StockDetailsCubit, StockDetailsState>(
+          bloc: context.read<IStockDetailsScope>().stockDetailsCubit,
+          listener: (context, stockDetailsState) {
+            stockDetailsState.whenOrNull(
+              idle: (tickerResult, dateRange, error) {
+                if (error != null) {
+                  SnackQueueProvider.of(context).addSnack(
+                    error.toString(),
+                    messageType: SnackMessageType.error,
+                  );
+                }
+              },
+            );
           },
-        );
-      },
+        ),
+        BlocListener<TickersCubit, TickersState>(
+          bloc: context.read<IDatabaseScope>().tickersCubit,
+          listener: (context, state) {
+            state.whenOrNull(
+              idle: (tickers, error) {
+                if (error == null) {
+                  _ticker = tickers.firstWhere((e) => e.ticker == _ticker.ticker);
+
+                  final tickerPrevDayO = _ticker.prevDay?.o;
+
+                  // Format the dollar value
+                  _formattedTickerPrevDayO =
+                      NumberFormat.simpleCurrency(decimalDigits: 2).format(tickerPrevDayO);
+                  setState(() {});
+                }
+              },
+            );
+          },
+        ),
+      ],
       child: BlocBuilder<StockDetailsCubit, StockDetailsState>(
         bloc: context.read<IStockDetailsScope>().stockDetailsCubit,
         builder: (context, stockDetailsState) {
@@ -111,7 +136,9 @@ class _StockDetailsScreenState extends State<StockDetailsScreen> {
                       height: 10,
                     ),
                     const Gap(10),
-                    _FooterOfStockDetails(ticker: _ticker),
+                    _FooterOfStockDetails(
+                      ticker: _ticker,
+                    ),
                     const Gap(10),
                     Divider(
                       color: AppColorScheme.of(context).dividerColor,

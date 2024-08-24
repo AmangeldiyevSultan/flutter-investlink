@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:investlink/src/features/database/data/converters/ticker_converter.dart';
 import 'package:investlink/src/features/database/domain/repositories/i_database_repository.dart';
+import 'package:investlink/src/features/socket/domain/entities/socket_message_entity.dart';
 import 'package:investlink/src/features/stock_search/data/models/day_model.dart';
 import 'package:investlink/src/features/stock_search/data/models/last_quote_model.dart';
 import 'package:investlink/src/features/stock_search/data/models/last_trade_model.dart';
@@ -112,6 +113,38 @@ final class DatabaseRepository implements IDatabaseRepository {
 
   @override
   Stream<List<TickersEntity>> get tickersStream => _tickersStreamController.stream;
+
+  @override
+  Future<void> changeFavoritesTicker(List<SocketMessageEntity> socketMessageList) async {
+    for (final socketMessage in socketMessageList) {
+      final ticker = socketMessage.ev;
+      if (ticker == null) continue;
+
+      final existingTicker = _tickersBox.get(ticker);
+      if (existingTicker == null) continue;
+
+      final existTickerEntity = _tickerConverter.convertReverse(existingTicker);
+
+      // Update the existing ticker with new data
+      final updatedTickerEntity = existTickerEntity.copyWith(
+        prevDay: existTickerEntity.prevDay?.copyWith(
+          o: double.tryParse(socketMessage.o ?? '') ?? existingTicker.prevDay?.o,
+          h: double.tryParse(socketMessage.h ?? '') ?? existingTicker.prevDay?.h,
+          l: double.tryParse(socketMessage.l ?? '') ?? existingTicker.prevDay?.l,
+          c: double.tryParse(socketMessage.c ?? '') ?? existingTicker.prevDay?.c,
+          v: double.tryParse(socketMessage.v ?? '') ?? existingTicker.prevDay?.v,
+          vw: double.tryParse(socketMessage.vw ?? '') ?? existingTicker.prevDay?.vw,
+        ),
+      );
+
+      final updatedTickerModel = _tickerConverter.convert(updatedTickerEntity);
+      // Save the updated ticker back to the box
+      await _tickersBox.put(ticker, updatedTickerModel);
+    }
+
+    // Notify listeners about the changes
+    _onTickersChanged();
+  }
 }
 
 /// Keys for [DatabaseRepository].

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:investlink/src/core/common/utils/logger/logger.dart';
 import 'package:investlink/src/features/socket/domain/entities/send_message_entity.dart';
+import 'package:investlink/src/features/socket/domain/entities/socket_message_entity.dart';
 import 'package:investlink/src/features/socket/domain/repositories/i_socket_repository.dart';
 
 part 'socket_bloc.freezed.dart';
@@ -33,6 +34,11 @@ class SocketState with _$SocketState {
 
   /// Message sended state.
   const factory SocketState.messageSended() = _MessageSendedSocketState;
+
+  /// Recieved message state.
+  const factory SocketState.recievedMessage({
+    @Default([]) List<SocketMessageEntity> socketMessage,
+  }) = _RecievedSendedSocketState;
 
   /// Returns whether the state is processing or not.
   bool get isProcessing => maybeMap(
@@ -71,7 +77,8 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     Emitter<SocketState> emit,
   ) async {
     await for (final listener in _socketRepository.listen()) {
-      logger.info(listener.toString());
+      logger.info('Socket Message List: $listener');
+      emit(SocketState.recievedMessage(socketMessage: listener));
     }
   }
 
@@ -82,7 +89,9 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     _socketRepository.send(
       SendMessageEntity(
         action: 'subscribe',
-        tickers: event.tickers,
+        tickers: event.tickers.join(', '),
+        userId: 2,
+        requestId: 124,
       ),
     );
     emit(const SocketState.messageSended());

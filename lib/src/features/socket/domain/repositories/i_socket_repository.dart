@@ -1,5 +1,6 @@
 import 'package:investlink/src/features/socket/data/repositories/socket_repository.dart';
 import 'package:investlink/src/features/socket/domain/entities/send_message_entity.dart';
+import 'package:investlink/src/features/socket/domain/entities/socket_message_entity.dart';
 
 /// Interface for [SocketRepository].
 abstract interface class ISocketRepository {
@@ -7,7 +8,7 @@ abstract interface class ISocketRepository {
 
   void send(SendMessageEntity sendMessage);
 
-  Stream<dynamic> listen();
+  Stream<List<SocketMessageEntity>> listen();
 
   Future<void> close();
 }

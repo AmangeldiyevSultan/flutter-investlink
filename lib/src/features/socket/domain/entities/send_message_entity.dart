@@ -9,7 +9,9 @@ part 'send_message_entity.freezed.dart';
 class SendMessageEntity with _$SendMessageEntity {
   /// {@macro day_entity.class}
   const factory SendMessageEntity({
-    required String? action,
-    required List<String>? tickers,
+    required String action,
+    required String tickers,
+    required int requestId,
+    required int userId,
   }) = _SendMessageEntity;
 }

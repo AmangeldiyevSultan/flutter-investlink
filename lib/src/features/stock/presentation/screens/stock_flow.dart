@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investlink/src/core/common/widgets/di_scope.dart';
+import 'package:investlink/src/features/database/di/database_scope.dart';
 import 'package:investlink/src/features/snackbar_queue/presentation/snack_message_type.dart';
 import 'package:investlink/src/features/snackbar_queue/presentation/snack_queue_provider.dart';
 import 'package:investlink/src/features/socket/di/socket_scope.dart';
@@ -46,6 +47,9 @@ class _StockFlowState extends State<StockFlow> {
 
   void _socketListener(_, SocketState state) {
     state.whenOrNull(
+      recievedMessage: (socketMessage) {
+        context.read<IDatabaseScope>().tickersCubit.changeTickerFromFavorites(socketMessage);
+      },
       connected: (error) {
         if (error != null) {
           SnackQueueProvider.of(context).addSnack(

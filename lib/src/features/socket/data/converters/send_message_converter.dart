@@ -17,6 +17,8 @@ final class SendMessageConverter extends ISendMessageConverter {
     return SendMessageModel(
       action: input.action,
       tickers: input.tickers,
+      requestId: input.requestId,
+      userId: input.userId,
     );
   }
 }
