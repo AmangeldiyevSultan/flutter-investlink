@@ -60,7 +60,6 @@ class StockDetailsCubit extends Cubit<StockDetailsState> {
           timePeriod =
               '1/week/${dateFormat.format(now.copyWith(year: now.year - 1))}/${dateFormat.format(now)}';
       }
-
       final tickerResult = await _stockDetailsRepository.getStockDetails(
         QueryParamsEntity(
           ticker: ticker,

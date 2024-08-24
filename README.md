@@ -8,15 +8,12 @@ InvestLink project.
 
 Do the following to initialize a project:
 
-1. Specify the name of the application [here](#enter-app-name-here).
-2. Search for `investlink` and replace it with the name of your project where needed.
-3. Install a needed Flutter version with FVM using the command:
+```sh
+fvm use <flutter_version>
+make codegen
+```
 
-   ```sh
-   fvm use <flutter_version>
-   ```
-
-   If FVM is not installed, check [FVM workflow](#fvm-workflow).
+If FVM is not installed, check [FVM workflow](#fvm-workflow).
 
 4. Specify the Flutter version used in the project [here](#flutter-and-dart-fvm-versions-of-the-project).
 
@@ -80,13 +77,13 @@ There are cases when you need to add different functionality for `dev` and `qa` 
 
 ```dart
 void main() {
-  run(const Environment(buildType: BuildType.qa));
+  run(const Environment(buildType: BuildType.dev));
 }
 ```
 
 ## DI
 
-[Provider](https://pub.dev/packages/provider) is our choice for DI.
+[Provider](https://pub.dev/packages/provider).
 
 Dependencies are grouped into container entities with an interface describing a set of dependencies supplied. This entity is, in turn, supplied to a functionality with a [DiScope](./lib/features/common/widgets/di_scope/di_scope.dart) widget, which is used as a wrapper for a corresponding functionality.
 

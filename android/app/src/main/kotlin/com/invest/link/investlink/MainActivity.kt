@@ -1,4 +1,4 @@
-package com.invest.link.investlink
+package com.investlink.investlink
 
 import io.flutter.embedding.android.FlutterActivity
 
